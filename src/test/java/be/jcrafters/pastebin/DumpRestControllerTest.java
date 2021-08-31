@@ -16,14 +16,16 @@ public class DumpRestControllerTest {
             strings = {"hello dump"}
     )
     public void dumpEndPointPOST() {
-        Dump result = given()
+        String result = given()
                 .when()
                 .body("hi")
                 .post("/dump")
                 .then()
                 .statusCode(200)
-                .extract().body().as(Dump.class);
-        assertThat(result.getDump()).isNotNull();
-        assertThat(result.getDump()).isEqualTo("hello dump");
+                .extract().body().asPrettyString();
+
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo("hello dump");
     }
 }
