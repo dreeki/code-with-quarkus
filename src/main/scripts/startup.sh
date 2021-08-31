@@ -3,7 +3,7 @@
 #docker logout
 #docker login
 
-echo "enter your docker repo with tag"
+#echo "enter your docker repo with tag"
 
 read repoName
 cd ../../../

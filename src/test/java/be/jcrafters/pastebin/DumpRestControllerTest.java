@@ -1,25 +1,29 @@
 package be.jcrafters.pastebin;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @QuarkusTest
 public class DumpRestControllerTest {
-
-    @Test
+    @ParameterizedTest
+    @ValueSource(
+            strings = {"hello dump"}
+    )
     public void dumpEndPointPOST() {
-        String result = given()
+        Dump result = given()
                 .when()
                 .body("hi")
                 .post("/dump")
                 .then()
                 .statusCode(200)
-                .extract().body().asPrettyString();
-
-        System.out.println("result = " + result);
+                .extract().body().as(Dump.class);
+        assertThat(result.getDump()).isNotNull();
+        assertThat(result.getDump()).isEqualTo("hello dump");
     }
-
 }
