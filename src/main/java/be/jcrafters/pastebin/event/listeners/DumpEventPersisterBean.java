@@ -20,8 +20,7 @@ public class DumpEventPersisterBean {
 	public void onDumpEvent(@Observes DumpEvent dumpEvent) {
 		LOGGER.info(this.getClass().getSimpleName() + " notified of dumpEvent. Doing stuff.");
 
-		inMemListDumpDAO.persist(dumpEvent
-		);
+		inMemListDumpDAO.persist(dumpEvent);
 	}
 
 }
